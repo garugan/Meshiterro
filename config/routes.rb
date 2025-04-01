@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :admins
   devise_for :users
   root to: "homes#top"
   get '/homes/about' => 'homes#about', as: "about"
+
+  devise_for :admin, skip: [:registrations, :password], controllers: {
+    sessions: 'admin/sessions'
+  }
 
   resources :post_images, only: [:new, :index, :show, :create, :destroy] do
     resource :favorite, only: [:create, :destroy]
