@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
 
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index'
+    resources :users, only: [:destroy]
+  end
+
   resources :post_images, only: [:new, :index, :show, :create, :destroy] do
     resource :favorite, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
